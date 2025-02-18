@@ -25,6 +25,15 @@ public class BallControl : MonoBehaviour
     void Update()
     {
         
+        if (rb2d.velocity.magnitude > 5)
+        {
+            rb2d.velocity *= 0.999f; // Reduce velocity by 1% every frame
+        }
+        else if (rb2d.velocity.magnitude < 5)
+        {
+            rb2d.velocity = rb2d.velocity.normalized * 5; // Set velocity magnitude to 10
+        }
+        
     }
 
     void OnCollisionEnter2D (Collision2D coll) {
@@ -32,6 +41,12 @@ public class BallControl : MonoBehaviour
             Vector2 vel;
             vel.x = rb2d.velocity.x;
             vel.y = (rb2d.velocity.y / 2) + (coll.collider.attachedRigidbody.velocity.y / 3);
+
+            if (vel.magnitude > 30)
+            {
+                vel = vel.normalized * 30;
+            }
+
             rb2d.velocity = vel;
         }
     }

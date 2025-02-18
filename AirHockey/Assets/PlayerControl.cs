@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody2D rb2d;
     public float boundY_cima = 0;
     public float boundY_baixo = -4;
-    public float boundX = 2.25f;
+    public float boundX = 2.6f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +39,7 @@ public class PlayerControl : MonoBehaviour
             pos.x = mousePos.x;
         }
 
-        transform.position = pos;
+        Vector2 targetPosition = new Vector2(pos.x, pos.y);
+        rb2d.MovePosition(targetPosition);
     }
 }
