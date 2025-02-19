@@ -20,6 +20,7 @@ public class Goal : MonoBehaviour
         if (hitInfo.tag == "Ball")
         {
             string goalName = transform.name;
+
             GameManager.Score(goalName);
             hitInfo.gameObject.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
         }
