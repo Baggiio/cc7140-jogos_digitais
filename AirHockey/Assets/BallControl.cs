@@ -88,13 +88,28 @@ public class BallControl : MonoBehaviour
     // Reinicializa o jogo
     void RestartGame(){
         ResetBall();
+        ResetAllStructures();
         Invoke("GoBall", 1);
     }
 
     void ResetGame(){
         nextSpawn = -1;
         ResetBall();
+        ResetAllStructures();
     }
 
+    void ResetAllStructures(){
+        GameObject[] structuresEsquerda = GameObject.FindGameObjectsWithTag("StructureEsquerda");
+        GameObject[] structuresDireita = GameObject.FindGameObjectsWithTag("StructureDireita");
 
+        foreach (GameObject structure in structuresEsquerda)
+        {
+            structure.GetComponent<structure>().ResetStructure();
+        }
+
+        foreach (GameObject structure in structuresDireita)
+        {
+            structure.GetComponent<structure>().ResetStructure();
+        }
+    }
 }

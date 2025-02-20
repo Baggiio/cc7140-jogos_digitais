@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class structure : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public int health = 100;
     private SpriteRenderer spriteRenderer;
+    private Vector3 initialPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -37,7 +38,7 @@ public class structure : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 
@@ -45,5 +46,13 @@ public class structure : MonoBehaviour
     {
         float healthPercentage = (float)health / 100;
         spriteRenderer.color = new Color(1, healthPercentage, healthPercentage);
+    }
+
+    public void ResetStructure()
+    {
+        health = 100;
+        UpdateColor();
+        transform.position = initialPosition;
+        gameObject.SetActive(true);
     }
 }
