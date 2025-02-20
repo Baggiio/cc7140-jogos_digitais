@@ -48,6 +48,12 @@ public class BallControl : MonoBehaviour
         {
             rb2d.velocity = rb2d.velocity.normalized * 5; // Set velocity magnitude to 10
         }
+
+        if (rb2d.velocity.x == 0 && rb2d.velocity.y > 0) {
+            rb2d.AddForce(new Vector2(1, 0));
+        } else if (rb2d.velocity.x == 0 && rb2d.velocity.y < 0) {
+            rb2d.AddForce(new Vector2(1, 0));
+        }
         
     }
 
@@ -88,28 +94,17 @@ public class BallControl : MonoBehaviour
     // Reinicializa o jogo
     void RestartGame(){
         ResetBall();
-        ResetAllStructures();
         Invoke("GoBall", 1);
+    }
+
+    void StopGame(){
+        nextSpawn = -1;
+        ResetBall();
     }
 
     void ResetGame(){
         nextSpawn = -1;
         ResetBall();
-        ResetAllStructures();
-    }
-
-    void ResetAllStructures(){
-        GameObject[] structuresEsquerda = GameObject.FindGameObjectsWithTag("StructureEsquerda");
-        GameObject[] structuresDireita = GameObject.FindGameObjectsWithTag("StructureDireita");
-
-        foreach (GameObject structure in structuresEsquerda)
-        {
-            structure.GetComponent<structure>().ResetStructure();
-        }
-
-        foreach (GameObject structure in structuresDireita)
-        {
-            structure.GetComponent<structure>().ResetStructure();
-        }
+        Invoke("GoBall", 1);
     }
 }

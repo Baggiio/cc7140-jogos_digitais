@@ -6,8 +6,8 @@ public class PlayerControl : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public float boundY_cima = 0;
-    public float boundY_baixo = -4;
-    public float boundX = 2.6f;
+    public float boundY_baixo = -4.3f;
+    public float boundX = 2.4f;
 
     // Start is called before the first frame update
     void Start()

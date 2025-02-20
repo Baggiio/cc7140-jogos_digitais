@@ -27,7 +27,7 @@ public class structure : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ball"))
         {
-            TakeDamage(10);
+            TakeDamage(25);
         }
     }
 
@@ -48,7 +48,7 @@ public class structure : MonoBehaviour
         spriteRenderer.color = new Color(1, healthPercentage, healthPercentage);
     }
 
-    public void ResetStructure()
+    void RestartGame()
     {
         health = 100;
         UpdateColor();

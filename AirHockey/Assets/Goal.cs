@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
+    GameObject structureEsquerda;
+    GameObject structureDireita;
     // Start is called before the first frame update
     void Start()
     {
-        
+        structureEsquerda = GameObject.FindGameObjectWithTag("StructureEsquerda");
+        structureDireita = GameObject.FindGameObjectWithTag("StructureDireita");
     }
 
     // Update is called once per frame
@@ -23,6 +26,10 @@ public class Goal : MonoBehaviour
 
             GameManager.Score(goalName);
             hitInfo.gameObject.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
+            structureDireita.SetActive(true);
+            structureEsquerda.SetActive(true);
+            structureDireita.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
+            structureEsquerda.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
         }
     }
 

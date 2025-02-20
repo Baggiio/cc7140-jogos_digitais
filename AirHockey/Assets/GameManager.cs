@@ -10,12 +10,16 @@ public class GameManager : MonoBehaviour
 
     public GUISkin layout;              // Fonte do placar
     GameObject theBall;              // Referência ao objeto bola
+    GameObject structureEsquerda;
+    GameObject structureDireita;
     
 
     // Start is called before the first frame update
     void Start()
     {
         theBall = GameObject.FindGameObjectWithTag("Ball"); // Busca a referência da bola
+        structureEsquerda = GameObject.FindGameObjectWithTag("StructureEsquerda");
+        structureDireita = GameObject.FindGameObjectWithTag("StructureDireita");
     }
 
     // Update is called once per frame
@@ -47,16 +51,28 @@ public class GameManager : MonoBehaviour
         {
             PlayerScore1 = 0;
             PlayerScore2 = 0;
-            theBall.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
+            theBall.SendMessage("StopGame", null, SendMessageOptions.RequireReceiver);
+            structureDireita.SetActive(true);
+            structureEsquerda.SetActive(true);
+            structureDireita.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
+            structureEsquerda.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
         }
         if (PlayerScore1 == 10)
         {
             GUI.Label(new Rect(Screen.width / 2 + 380, 200, 2000, 1000), "PLAYER ONE WINS");
-            theBall.SendMessage("ResetGame", null, SendMessageOptions.RequireReceiver);
+            theBall.SendMessage("StopGame", null, SendMessageOptions.RequireReceiver);
+            structureDireita.SetActive(true);
+            structureEsquerda.SetActive(true);
+            structureDireita.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
+            structureEsquerda.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
         } else if (PlayerScore2 == 10)
         {
             GUI.Label(new Rect(Screen.width / 2 + 380, 200, 2000, 1000), "PLAYER TWO WINS");
-            theBall.SendMessage("ResetGame", null, SendMessageOptions.RequireReceiver);
+            theBall.SendMessage("ResetBall", null, SendMessageOptions.RequireReceiver);
+            structureDireita.SetActive(true);
+            structureEsquerda.SetActive(true);
+            structureDireita.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
+            structureEsquerda.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
         }
     }
 
