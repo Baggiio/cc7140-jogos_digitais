@@ -52,14 +52,14 @@ public class BallControl : MonoBehaviour
     }
 
     void OnCollisionEnter2D (Collision2D coll) {
-        if(coll.collider.CompareTag("Player")){
+        if(coll.collider.CompareTag("Player") || coll.collider.CompareTag("IA")) {
             Vector2 vel;
             vel.x = rb2d.velocity.x;
             vel.y = (rb2d.velocity.y / 2) + (coll.collider.attachedRigidbody.velocity.y / 3);
 
-            if (vel.magnitude > 30)
+            if (vel.magnitude > 15)
             {
-                vel = vel.normalized * 30;
+                vel = vel.normalized * 15;
             }
 
             rb2d.velocity = vel;
@@ -94,7 +94,6 @@ public class BallControl : MonoBehaviour
     void ResetGame(){
         nextSpawn = -1;
         ResetBall();
-        Invoke("GoBall", 1);
     }
 
 

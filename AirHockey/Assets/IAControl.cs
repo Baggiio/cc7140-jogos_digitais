@@ -29,13 +29,13 @@ public class IAControl : MonoBehaviour
 
         if (ball_pos.y < 0)
         {
-            targetY = Mathf.MoveTowards(transform.position.y, 4, scaledT / 10);
+            targetY = Mathf.MoveTowards(transform.position.y, 4, scaledT / 3);
         }
         else if (ball_pos.y > 0)
         {
             if (ball_pos.y > transform.position.y)
             {
-                targetY = Mathf.MoveTowards(transform.position.y, 4, scaledT / 5);
+                targetY = Mathf.MoveTowards(transform.position.y, 4, scaledT / 3);
             }
             else
             {

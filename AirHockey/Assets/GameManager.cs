@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerScore1 = 0;
             PlayerScore2 = 0;
-            theBall.SendMessage("ResetGame", null, SendMessageOptions.RequireReceiver);
+            theBall.SendMessage("RestartGame", null, SendMessageOptions.RequireReceiver);
         }
         if (PlayerScore1 == 10)
         {
