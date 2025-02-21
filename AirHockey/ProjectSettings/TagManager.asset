@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ball
   - IA
+  - StructureEsquerda
+  - StructureDireita
   layers:
   - Default
   - TransparentFX
