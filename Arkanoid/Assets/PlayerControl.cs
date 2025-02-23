@@ -40,4 +40,8 @@ public class PlayerControl : MonoBehaviour
         }
         transform.position = pos;               // Atualiza a posição da raquete
     }
+
+    void RestartPosition() {
+        transform.position = new Vector2(0, -4.5f); // Reposiciona a raquete
+    }
 }
