@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public float speed = 20.0f;             // Define a velocidade da bola
     public float boundX = 4.0f;            // Define os limites em Y
     private Rigidbody2D rb2d;               // Define o corpo rigido 2D que representa a raquete
+    private bool isDead = false;            // Define se o jogador morreu
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,13 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         var vel = rb2d.velocity;                // Acessa a velocidade da raquete
+        if (isDead) {
+            vel = Vector2.zero;                 // Define a velocidade da raquete como zero
+            return;
+        }
         if (Input.GetKey(moveLeft)) {             // Velocidade da Raquete para ir para cima
             vel.x = -speed;
         }
@@ -43,5 +50,9 @@ public class PlayerControl : MonoBehaviour
 
     void RestartPosition() {
         transform.position = new Vector2(0, -4.5f); // Reposiciona a raquete
+    }
+
+    void Die() {
+        isDead = true; // Define que o jogador morreu
     }
 }

@@ -8,10 +8,12 @@ public class BallControl : MonoBehaviour
     private Rigidbody2D rb2d; 
     private bool isLaunched = false;
     public float ballSpeed = 10.0f;
+    public AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,8 @@ public class BallControl : MonoBehaviour
         } else if (coll.collider.CompareTag("Block")) {
             coll.gameObject.GetComponent<Block>().TakeDamage(100);
         }
+
+        source.Play();
     }
 
     void RestartPosition() {

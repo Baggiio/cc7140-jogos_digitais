@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public static int lifes = 3; // Vidas do jogador
     public static GameObject thePlayer; // Referência ao objeto jogador
+    public GameObject gameOverUI; // Tela de game over
+    public GameObject mainMenuUI; // Tela de menu principal
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,11 @@ public class GameManager : MonoBehaviour
         lifes--;
         DrawLifes();
         thePlayer.SendMessage("RestartPosition", null, SendMessageOptions.RequireReceiver);
+
+        if (lifes == 0) {
+            FindAnyObjectByType<GameManager>().GameOver();
+            thePlayer.SendMessage("Die", null, SendMessageOptions.RequireReceiver);
+        }
     }
 
     public static void DrawLifes() {
@@ -47,8 +55,22 @@ public class GameManager : MonoBehaviour
     // Gerência da pontuação e fluxo do jogo
     void OnGUI () {
         GUI.skin = layout;
-        GUI.Label(new Rect(Screen.width / 2 + 380 - 12, 10, 100, 100), "" + PlayerScore1);
+        GUI.Label(new Rect(Screen.width / 2 - 13, 2, 200, 200), "" + PlayerScore1);
     }
 
+    public void GameOver() {
+        gameOverUI.SetActive(true);
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        lifes = 3;
+        PlayerScore1 = 0;
+    }
+
+    public void AddPointPlayer1() {
+        PlayerScore1++;
+    }
+    
 
 }
