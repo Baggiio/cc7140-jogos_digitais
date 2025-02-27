@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public static GameObject thePlayer; // Referência ao objeto jogador
     public GameObject gameOverUI; // Tela de game over
     public GameObject mainMenuUI; // Tela de menu principal
+    public static GameObject Blocks; // Referência aos blocos
 
     // Start is called before the first frame update
     void Start()
@@ -50,14 +51,18 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         Scene scene = SceneManager.GetActiveScene();
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("Brick");
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Block");
         print(gos.Length);
         if(gos.Length == 0){
-            if (scene.name == "Scene1"){
+            if (scene.name == "MainMenu"){
+                SceneManager.LoadScene("Scene1");
+            } else if (scene.name == "Scene1"){
                 SceneManager.LoadScene("Scene2");
-            } else if(scene.name == "Scene2"){
-            }
+            } else if (scene.name == "Scene2"){
+                SceneManager.LoadScene("MainMenu");
+            } 
         }
+
     }
 
     // Gerência da pontuação e fluxo do jogo
