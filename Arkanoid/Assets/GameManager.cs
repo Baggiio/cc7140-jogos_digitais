@@ -13,14 +13,14 @@ public class GameManager : MonoBehaviour
 
     public static int lifes = 3; // Vidas do jogador
     public static GameObject thePlayer; // Referência ao objeto jogador
-    public GameObject gameOverUI; // Tela de game over
-    public GameObject mainMenuUI; // Tela de menu principal
     public static GameObject Blocks; // Referência aos blocos
 
     // Start is called before the first frame update
     void Start()
     {
         thePlayer = GameObject.FindGameObjectWithTag("Player"); // Busca a referência do jogador
+        RestartGame();
+        DrawLifes();
     }
 
     public static void LoseLife() {
@@ -52,14 +52,13 @@ public class GameManager : MonoBehaviour
     {
         Scene scene = SceneManager.GetActiveScene();
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Block");
-        print(gos.Length);
+        Debug.Log(gos.Length);
+        Debug.Log(scene.name);
         if(gos.Length == 0){
-            if (scene.name == "MainMenu"){
-                SceneManager.LoadScene("Scene1");
-            } else if (scene.name == "Scene1"){
+            if (scene.name == "Scene1"){
                 SceneManager.LoadScene("Scene2");
             } else if (scene.name == "Scene2"){
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("YouWin");
             } 
         }
 
@@ -72,11 +71,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void GameOver() {
-        gameOverUI.SetActive(true);
+        SceneManager.LoadScene("GameOver");
     }
 
     public void RestartGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         lifes = 3;
         PlayerScore1 = 0;
     }

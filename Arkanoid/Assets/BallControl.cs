@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BallControl : MonoBehaviour
 {
@@ -49,8 +50,24 @@ public class BallControl : MonoBehaviour
 
             rb2d.velocity = vel;
         } else if (coll.collider.CompareTag("Block")) {
-            coll.gameObject.GetComponent<Block>().TakeDamage(100);
+
+            if (SceneManager.GetActiveScene().name == "Scene1") {
+                coll.gameObject.GetComponent<Block>().TakeDamage(100);
+            } else if (SceneManager.GetActiveScene().name == "Scene2") {
+                coll.gameObject.GetComponent<Block>().TakeDamage(50);
+            }
+
         }
+
+        // Ensure the ball doesn't get stuck in a purely horizontal or vertical movement
+        Vector2 currentVelocity = rb2d.velocity;
+        if (Mathf.Abs(currentVelocity.x) < 0.5f) {
+            currentVelocity.x = Mathf.Sign(currentVelocity.x) * 0.5f;
+        }
+        if (Mathf.Abs(currentVelocity.y) < 0.5f) {
+            currentVelocity.y = Mathf.Sign(currentVelocity.y) * 0.5f;
+        }
+        rb2d.velocity = currentVelocity;
 
         source.Play();
     }
