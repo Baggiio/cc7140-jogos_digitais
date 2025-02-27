@@ -49,7 +49,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Scene scene = SceneManager.GetActiveScene();
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Brick");
+        print(gos.Length);
+        if(gos.Length == 0){
+            if (scene.name == "Scene1"){
+                SceneManager.LoadScene("Scene2");
+            } else if(scene.name == "Scene2"){
+            }
+        }
     }
 
     // Gerência da pontuação e fluxo do jogo
