@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static int lifes = 3; // Vidas do jogador
     public static GameObject thePlayer; // Referência ao objeto jogador
     public static GameObject Blocks; // Referência aos blocos
+    public int blocksToBeat = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Block");
         Debug.Log(gos.Length);
         Debug.Log(scene.name);
-        if(gos.Length == 0){
+        if(gos.Length == blocksToBeat){
             if (scene.name == "Scene1"){
                 SceneManager.LoadScene("Scene2");
             } else if (scene.name == "Scene2"){

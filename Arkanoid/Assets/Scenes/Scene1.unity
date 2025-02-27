@@ -2449,8 +2449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   layout: {fileID: 11400000, guid: 7e7dfc44087d6b34b9f6a813a3858227, type: 2}
-  gameOverUI: {fileID: 0}
-  mainMenuUI: {fileID: 0}
+  blocksToBeat: 65
 --- !u!4 &449082260
 Transform:
   m_ObjectHideFlags: 0
