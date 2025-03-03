@@ -10,6 +10,8 @@ public class Invaders : MonoBehaviour
     private int state = 0;
     private float x;
     private float speed = 2.0f;
+    public int health = 100;
+    public GameObject gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +39,13 @@ public class Invaders : MonoBehaviour
         var vel = rb2d.velocity;
         vel.x *= -1;
         rb2d.velocity = vel;
+    }
+
+    public void TakeDamage(int damage){
+        health -= damage;
+        if (health <= 0){
+            Destroy(gameObject);
+        }
     }
 
 }
