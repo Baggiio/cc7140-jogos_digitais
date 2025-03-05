@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private float mothershipInterval;
     public float mothershipSpeed = 5.0f;
     public GameObject mothershipPrefab;
+    private AudioSource source;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +26,15 @@ public class GameManager : MonoBehaviour
         DrawLifes();
 
         mothershipInterval = Random.Range(10.0f, 20.0f);
+        source = GetComponent<AudioSource>();
     }
 
     public void LoseLife() {
         lifes--;
         DrawLifes();
         thePlayer.SendMessage("RestartPosition", null, SendMessageOptions.RequireReceiver);
+
+        source.Play();
 
         if (lifes == 0) {
             GameOver();
@@ -140,8 +144,8 @@ public class GameManager : MonoBehaviour
         PlayerScore1 += 30;
     }
 
-    public void Add100PointPlayer1() {
-        PlayerScore1 += 100;
+    public void Add50PointPlayer1() {
+        PlayerScore1 += 50;
     }
 
     void SpawnMotherShip() {
@@ -164,7 +168,7 @@ public class GameManager : MonoBehaviour
             rb2d.velocity = new Vector2(-mothershipSpeed, 0);
         }
 
-        Destroy(motherShip, 10.0f);
+        Destroy(motherShip, 5.0f);
 
     }
     

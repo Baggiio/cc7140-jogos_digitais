@@ -26,12 +26,15 @@ public class Invaders : MonoBehaviour
     private float shootInterval = 0.5f;
     private float startPositionY;
     private int level = 0;
+    private AudioSource source;
 
     // Start is called before the first frame update
     void Start()
     {
 
         startPositionY = transform.position.y;
+
+        source = GetComponent<AudioSource>();
 
         rb2d = GetComponent<Rigidbody2D>();  
         x = transform.position.x;
@@ -105,6 +108,7 @@ public class Invaders : MonoBehaviour
     }
 
     public void ExplodeAndDestroy() {
+        source.Play();
         Animator animator = gameObject.GetComponent<Animator>();
         if (animator != null) {
             Destroy(animator);
