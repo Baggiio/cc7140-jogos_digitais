@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 27
-  productGUID: 7494c9b4a2441564b84d5bd3ce42091b
+  productGUID: 831c05a390bdfe9489155054254925a1
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -638,14 +638,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: SpaceInvaders
+  metroPackageName: Arkanoid
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: SpaceInvaders
+  metroApplicationDescription: Arkanoid
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -715,10 +715,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 39053a35-a631-4371-a2df-0356f94d1b0e
+  cloudProjectId: 2458a2c4-792f-491f-88f1-900343cd9981
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: SpaceInvaders
+  projectName: Arkanoid
   organizationId: ggbaggio
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

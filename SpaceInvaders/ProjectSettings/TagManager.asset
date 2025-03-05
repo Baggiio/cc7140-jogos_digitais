@@ -4,8 +4,14 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Invader
   - Bullet
+  - Invader
+  - Wall
+  - Invader3
+  - Invader2
+  - Invader1
+  - InvaderBullet
+  - Mothership
   layers:
   - Default
   - TransparentFX
@@ -13,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Foreground
   - 
   - 
   - 
@@ -40,6 +46,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3655522783
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Foreground
+    uniqueID: 555203827
     locked: 0
