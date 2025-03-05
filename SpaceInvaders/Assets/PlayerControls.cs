@@ -11,8 +11,6 @@ public class PlayerControls : MonoBehaviour
     public float boundX = 4.0f;
     private Rigidbody2D rb2d;
     private bool isDead = false;
-    //bullet prefab
-    public GameObject bullet;
  
     // Start is called before the first frame update
     void Start()
@@ -48,7 +46,6 @@ public class PlayerControls : MonoBehaviour
         }
         transform.position = pos;               // Atualiza a posição da raquete
 
-        Shoot();                                // Chama o método Shoot para permitir disparos
     }
 
     void RestartPosition() {
@@ -57,15 +54,5 @@ public class PlayerControls : MonoBehaviour
 
     void Die() {
         isDead = true; // Define que o jogador morreu
-    }
-
-    void Shoot() {
-        if (Input.GetKeyDown(shot)) {
-            // Create a bullet instance and set its position and direction
-            GameObject bullet = Instantiate(Resources.Load("Bullet", typeof(GameObject))) as GameObject;
-            bullet.transform.position = transform.position + new Vector3(0, 1, 0);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.velocity = new Vector2(0, speed);
-        }
     }
 }
