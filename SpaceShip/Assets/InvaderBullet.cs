@@ -21,8 +21,6 @@ public class InvaderBullet : MonoBehaviour
         if (coll.gameObject.tag == "Player"){
             Destroy(this.gameObject);
             gameManager.GetComponent<GameManager>().LoseLife();
-        } else {
-            Destroy(this.gameObject); 
         }
 
     }

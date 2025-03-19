@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class Invaders : MonoBehaviour
 {
+    public GameObject gameManager;
     private Rigidbody2D rb2d;
     private float timer = 0.0f;
-    private float waitTime = 2.0f;
+    private float waitTime = 3.0f;
     private int state = 0;
     private float x;
-    private float speed = 1.0f;
+    private float speed = -5.0f;
     public Sprite spriteImage;
     public float startOffset = 0.0f;
-    private bool hasStartedMoving = false;
+    public int shootChance = 20; // 5% chance of shooting
     
     // Variables for vertical movement
-    private float verticalMoveTimer = 0.0f;
-    private float verticalMoveInterval = 10.0f; // Move down every 10 seconds
     private float verticalMoveDistance = 0.815f; // Distance to move down
     // Bullet related variables
     public GameObject bulletPrefab;         // Prefab for the bullet
@@ -31,53 +30,22 @@ public class Invaders : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        startPositionY = transform.position.y;
-
+        gameManager = GameObject.Find("Display");
         source = GetComponent<AudioSource>();
 
         rb2d = GetComponent<Rigidbody2D>();  
-        x = transform.position.x;
-
-        // Initialize with zero velocity
-        rb2d.velocity = Vector2.zero;
-        
-        // Start the delayed movement coroutine
-        StartCoroutine(StartMovementAfterDelay());
     }
 
     // Coroutine to wait for startOffset before beginning movement
-    IEnumerator StartMovementAfterDelay()
-    {
-        // Wait for the specified offset time
-        yield return new WaitForSeconds(startOffset);
-        
-        // Start moving
-        var vel = rb2d.velocity;
-        vel.x = speed;
-        rb2d.velocity = vel;
-        hasStartedMoving = true;
-    }
-
     // Update is called once per frame
     void Update()
     {
-        // Only start the movement timers after the initial offset delay
-        if (!hasStartedMoving)
-            return;
-            
+
         // Horizontal movement timer
         timer += Time.deltaTime;
         if (timer >= waitTime){
-            ChangeState();
+            MoveUpOrDown();
             timer = 0.0f;
-        }
-
-        // Vertical movement timer
-        verticalMoveTimer += Time.deltaTime;
-        if (verticalMoveTimer >= verticalMoveInterval){
-            MoveDown();
-            verticalMoveTimer = 0.0f;
         }
 
         // Shoot timer
@@ -89,21 +57,35 @@ public class Invaders : MonoBehaviour
         
     }
 
-    void ChangeState(){
-        increaseSpeed(level);
-        var vel = rb2d.velocity;
-        if (vel.x > 0)
-            vel.x = speed;
-        else
-            vel.x = -speed;
-        vel.x *= -1;
-        rb2d.velocity = vel;
+    void MoveUpOrDown(){
+
+        Vector2 position = transform.position;
+
+        if (position.x < 0.0f) {
+            return;
+        }
+
+        int random = Random.Range(0, 2);
+
+        if (random == 0 && position.y > -2.5f) {
+            MoveDown();
+        }
+        else if (random == 1 && position.y < 2.5f) {
+            MoveUp();
+        }
     }
     
     void MoveDown(){
         // Move the invader down by the specified distance
         Vector2 position = transform.position;
         position.y -= verticalMoveDistance;
+        transform.position = position;
+    }
+
+    void MoveUp(){
+        // Move the invader up by the specified distance
+        Vector2 position = transform.position;
+        position.y += verticalMoveDistance;
         transform.position = position;
     }
 
@@ -122,50 +104,35 @@ public class Invaders : MonoBehaviour
     void Shoot() {
 
         int random = Random.Range(0, 100);
-        if (random > 5) // 5% chance of shooting
+        if (random > shootChance) // 5% chance of shooting
             return;
 
         // if there is already a bullet in the scene (InvaderBullet tag), don't shoot
         if (GameObject.FindWithTag("InvaderBullet") != null)
             return;
 
-        // get gameObject name
-        string name = gameObject.name;
-
         // gameObject name should be Linei-j
         // where i is the line number and j is the invader number
 
-        // get the line number
-        int line = int.Parse(name.Substring(4, 1));
-        int column = int.Parse(name.Substring(6, 1));
-
-        // only the last invader invader in the column shoots, so verify if gameObject Linei+1-j exists
-        GameObject nextInvader = GameObject.Find("Line" + (line + 1) + "-" + column);
-        if (nextInvader == null) {
-            // Create bullet at invader position with slight Y offset
-            Vector2 bulletPosition = new Vector2(transform.position.x, transform.position.y - 0.5f);
-            GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.identity);
-            
-            // If the bullet doesn't have a Rigidbody2D, add one
-            Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-            if (bulletRb == null)
-            {
-                bulletRb = bullet.AddComponent<Rigidbody2D>();
-                bulletRb.gravityScale = 0; // No gravity for the bullet
-            }
-            
-            // If the bullet doesn't have a BoxCollider2D, add one
-            if (bullet.GetComponent<BoxCollider2D>() == null)
-            {
-                bullet.AddComponent<BoxCollider2D>();
-            }
-            
-            // Set bullet velocity (downward)
-            bulletRb.velocity = new Vector2(0, -bulletSpeed);
-            
-            // Destroy bullet after 3 seconds to prevent memory issues
-            Destroy(bullet, 3f);
+        Vector2 bulletPosition = new Vector2(transform.position.x - 0.5f, transform.position.y);
+        GameObject bullet = Instantiate(bulletPrefab, bulletPosition, Quaternion.Euler(0, 0, 90));
+        
+        // If the bullet doesn't have a Rigidbody2D, add one
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        if (bulletRb == null)
+        {
+            bulletRb = bullet.AddComponent<Rigidbody2D>();
+            bulletRb.gravityScale = 0; // No gravity for the bullet
         }
+        
+        // If the bullet doesn't have a BoxCollider2D, add one
+        if (bullet.GetComponent<BoxCollider2D>() == null)
+        {
+            bullet.AddComponent<BoxCollider2D>();
+        }
+        
+        // Set bullet velocity (downward)
+        bulletRb.velocity = new Vector2(-bulletSpeed, 0);
     }
 
     void ResetPosition() {
@@ -174,7 +141,6 @@ public class Invaders : MonoBehaviour
         transform.position = position;
 
         // reset timers
-        verticalMoveTimer = 0.0f;
         shootTimer = 0.0f;
     }
 
@@ -189,17 +155,21 @@ public class Invaders : MonoBehaviour
     void increaseSpeed(int level) {
 
         if (level == 1) {
-            speed = 1.5f;
-            waitTime = 1.5f;
-            verticalMoveInterval = 7.5f;
+            speed = -2f;
+            waitTime = 3f;
         } else if (level == 2) {
-            speed = 2.0f;
-            waitTime = 1f;
-            verticalMoveInterval = 5.0f;
+            speed = -3.0f;
+            waitTime = 2f;
         } else {
-            speed = 1.0f;
-            waitTime = 2.0f;
-            verticalMoveInterval = 10.0f;
+            speed = -4.0f;
+            waitTime = 1.0f;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D coll){
+        if (coll.gameObject.tag == "Player") {
+            Destroy(this.gameObject);
+            gameManager.GetComponent<GameManager>().LoseLife();
         }
     }
 }   
