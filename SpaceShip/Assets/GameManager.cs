@@ -18,7 +18,14 @@ public class GameManager : MonoBehaviour
     public GameObject ship1Prefab;
     public GameObject ship2Prefab;
     public GameObject ship3Prefab;
+    public GameObject background1;
+    public GameObject background2;
+    public GameObject stars1;
+    public GameObject stars2;
     private AudioSource source;
+    public int pointsToActivateSlowMotion = 100;
+    private int lastScore = 0;
+    private float slowMotionTime = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -77,40 +84,66 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Scene scene = SceneManager.GetActiveScene();
-        // GameObject[] invaders3 = GameObject.FindGameObjectsWithTag("Invader3");
-        // GameObject[] invaders2 = GameObject.FindGameObjectsWithTag("Invader2");
-        // GameObject[] invaders1 = GameObject.FindGameObjectsWithTag("Invader1");
+        if (PlayerScore1 - lastScore >= pointsToActivateSlowMotion) {
+            slowMotionTime -= Time.deltaTime;
 
-        // int len = invaders3.Length + invaders2.Length + invaders1.Length;
+            background1.GetComponent<Parallax>().setSpeed(0.1f);
+            background2.GetComponent<Parallax>().setSpeed(0.1f);
+            stars1.GetComponent<Parallax>().setSpeed(0.05f);
+            stars2.GetComponent<Parallax>().setSpeed(0.05f);
 
-        // if(len == 25) {
-        //     foreach (GameObject invader in invaders3) {
-        //         invader.GetComponent<Invaders>().setSpeedLevel(1);
-        //     }
+            GameObject[] invaders3 = GameObject.FindGameObjectsWithTag("Invader3");
+            GameObject[] invaders2 = GameObject.FindGameObjectsWithTag("Invader2");
+            GameObject[] invaders1 = GameObject.FindGameObjectsWithTag("Invader1");
+            GameObject[] invaderBullets = GameObject.FindGameObjectsWithTag("InvaderBullet");
+
+            foreach (GameObject invader in invaders3) {
+                invader.GetComponent<Invaders>().setSpeedLevel(0);
+            }
             
-        //     foreach (GameObject invader in invaders2) {
-        //         invader.GetComponent<Invaders>().setSpeedLevel(1);
-        //     }
+            foreach (GameObject invader in invaders2) {
+                invader.GetComponent<Invaders>().setSpeedLevel(0);
+            }
 
-        //     foreach (GameObject invader in invaders1) {
-        //         invader.GetComponent<Invaders>().setSpeedLevel(1);
-        //     }
-        // } else if (len == 10) {
-        //     foreach (GameObject invader in invaders3) {
-        //         invader.GetComponent<Invaders>().setSpeedLevel(2);
-        //     }
-            
-        //     foreach (GameObject invader in invaders2) {
-        //         invader.GetComponent<Invaders>().setSpeedLevel(2);
-        //     }
+            foreach (GameObject invader in invaders1) {
+                invader.GetComponent<Invaders>().setSpeedLevel(0);
+            }
 
-        //     foreach (GameObject invader in invaders1) {
-        //         invader.GetComponent<Invaders>().setSpeedLevel(2);
-        //     }
-        // } else if (len == 0){
-        //     SceneManager.LoadScene("YouWin");
-        // }
+            foreach (GameObject invaderBullet in invaderBullets) {
+                invaderBullet.GetComponent<InvaderBullet>().setSpeed(-2f);
+            }
+
+            if (slowMotionTime <= 0) {
+                slowMotionTime = 10f;
+
+                background1.GetComponent<Parallax>().setSpeed(0.5f);
+                background2.GetComponent<Parallax>().setSpeed(0.5f);
+                stars1.GetComponent<Parallax>().setSpeed(0.3f);
+                stars2.GetComponent<Parallax>().setSpeed(0.3f);
+
+                invaders3 = GameObject.FindGameObjectsWithTag("Invader3");
+                invaders2 = GameObject.FindGameObjectsWithTag("Invader2");
+                invaders1 = GameObject.FindGameObjectsWithTag("Invader1");
+                invaderBullets = GameObject.FindGameObjectsWithTag("InvaderBullet");
+
+                foreach (GameObject invader in invaders3) {
+                    invader.GetComponent<Invaders>().setSpeedLevel(1);
+                }
+                
+                foreach (GameObject invader in invaders2) {
+                    invader.GetComponent<Invaders>().setSpeedLevel(1);
+                }
+
+                foreach (GameObject invader in invaders1) {
+                    invader.GetComponent<Invaders>().setSpeedLevel(1);
+                }
+                lastScore = PlayerScore1;
+            }
+        }
+        
+        if (PlayerScore1 >= 1000){
+            SceneManager.LoadScene("YouWin");
+        }
 
         shipInterval -= Time.deltaTime;
         if (shipInterval <= 0) {

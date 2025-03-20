@@ -24,7 +24,7 @@ public class Invaders : MonoBehaviour
     private float shootTimer = 0.0f;
     private float shootInterval = 0.5f;
     private float startPositionY;
-    private int level = 0;
+    private int level = 1;
     private AudioSource source;
 
     // Start is called before the first frame update
@@ -54,6 +54,8 @@ public class Invaders : MonoBehaviour
             Shoot();
             shootTimer = 0.0f;
         }
+
+        increaseSpeed(level);
         
     }
 
@@ -133,6 +135,8 @@ public class Invaders : MonoBehaviour
         
         // Set bullet velocity (downward)
         bulletRb.velocity = new Vector2(-bulletSpeed, 0);
+
+        Destroy(bullet, 5f);
     }
 
     void ResetPosition() {
@@ -157,13 +161,12 @@ public class Invaders : MonoBehaviour
         if (level == 1) {
             speed = -2f;
             waitTime = 3f;
-        } else if (level == 2) {
-            speed = -3.0f;
-            waitTime = 2f;
         } else {
-            speed = -4.0f;
-            waitTime = 1.0f;
+            speed = -1f;
+            waitTime = 5.0f;
         }
+
+        rb2d.velocity = new Vector2(speed, 0);
     }
 
     void OnCollisionEnter2D(Collision2D coll){

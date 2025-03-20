@@ -18,7 +18,7 @@ public class GameOver : MonoBehaviour
     }
 
     public void RestartGame() {
-        SceneManager.LoadScene("Scene1");
+        SceneManager.LoadScene("SpaceShip");
     }
 
     public void MainMenu() {

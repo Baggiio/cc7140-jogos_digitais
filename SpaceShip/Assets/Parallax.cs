@@ -23,4 +23,8 @@ public class Parallax : MonoBehaviour
             transform.position = new Vector3(lenght, transform.position.y, transform.position.z);
         }
     }
+
+    public void setSpeed(float speed) {
+        parallaxEffect = speed;
+    }
 }

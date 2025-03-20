@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     public float boundY = 2.0f;            // Define os limites em X
     private Rigidbody2D rb2d;               // Define o corpo rigido 2D que representa a raquete
     private bool isDead = false;            // Define se o jogador morreu
+    private GameObject display;             // Define o objeto Display
     
     // Bullet related variables
     public GameObject bulletPrefab;         // Prefab for the bullet
@@ -24,6 +25,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        display = GameObject.Find("Display"); // Busca o objeto Display
         rb2d = GetComponent<Rigidbody2D>();     // Inicializa a raquete
     }
 
@@ -81,7 +83,7 @@ public class PlayerControl : MonoBehaviour
     }
 
     void RestartPosition() {
-        transform.position = new Vector2(0, -4.0f); // Reposiciona a raquete
+        transform.position = new Vector2(-4.84f, 0f); // Reposiciona a raquete
     }
 
     void Die() {

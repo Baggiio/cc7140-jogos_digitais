@@ -167,14 +167,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9145574111266999851}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -198,8 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36f3419687e6f048b86fe65985473c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   spriteImage: {fileID: -501484438, guid: 917a90c72f20be640adf9950f5b731da, type: 3}
   startOffset: 0.15
+  shootChance: 20
   bulletPrefab: {fileID: 8298917219582577233, guid: d0016c733b01cc74f9000ef3e34b76a6, type: 3}
   bulletSpeed: 5
   shootCooldown: 0.3
