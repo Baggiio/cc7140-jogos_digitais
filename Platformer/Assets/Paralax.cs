@@ -20,12 +20,10 @@ public class Paralax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // increase background position X to half of camera position X delta
-
+        // Apply parallax effect to both X and Y axes
         Vector2 camera_position = followCamera.transform.position;
-        Vector2 background_position = transform.position;
         Vector2 camera_delta = camera_position - camera_start_position;
         Vector2 background_delta = new Vector2(camera_delta.x / 2, camera_delta.y / 2);
-        transform.position = new Vector2(background_start_position.x + background_delta.x, background_start_position.y);
+        transform.position = background_start_position + background_delta;
     }
 }
