@@ -61,6 +61,8 @@ namespace SupanthaPaul
 		private int m_onWallSide = 0;
 		private int m_playerSide = 1;
 
+		public GameObject dialogueBox;
+
 
 		void Start()
 		{
@@ -249,6 +251,11 @@ namespace SupanthaPaul
 				m_rb.AddForce(new Vector2(-m_onWallSide * wallClimbForce.x, wallClimbForce.y), ForceMode2D.Impulse);
 			}
 
+			if (transform.position.x > -6.3f && transform.position.x < -4.5f) {
+				if (Input.GetKeyDown(KeyCode.F)) {
+					dialogueBox.SetActive(true);
+				}
+			}
 		}
 
 		void Flip()

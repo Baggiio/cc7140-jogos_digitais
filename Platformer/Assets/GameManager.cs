@@ -73,6 +73,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         DrawLifes();
+
+        if (PlayerScore1 >= 7)
+        {
+            PlayerScore1 = 0; // Reset score when reaching 7 points
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load next level
+        }
     }
 
     // Gerência da pontuação e fluxo do jogo
