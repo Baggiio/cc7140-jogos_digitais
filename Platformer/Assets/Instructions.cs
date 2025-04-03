@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class Instructions : MonoBehaviour
 {
     public GUISkin layout;              // Fonte do placar
@@ -23,8 +22,7 @@ public class Instructions : MonoBehaviour
         GUI.skin = layout;
     }
 
-    public void LoadMainMenu()
-    {
+    public void LoadMainMenu(){
         SceneManager.LoadScene("MainMenu");
     }
 }
