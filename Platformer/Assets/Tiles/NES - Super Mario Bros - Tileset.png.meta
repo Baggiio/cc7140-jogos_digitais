@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      NES - Super Mario Bros - Tileset_0: -7683969000865734668
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

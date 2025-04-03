@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
         }
         else if (lifes == 0)
         {
+            GameObject heart0 = GameObject.Find("Heart0");
+            heart0.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject heart1 = GameObject.Find("Heart1");
+            heart1.GetComponent<SpriteRenderer>().enabled = false;
             GameObject heart2 = GameObject.Find("Heart2");
             heart2.GetComponent<SpriteRenderer>().enabled = false;
         }
@@ -78,11 +82,14 @@ public class GameManager : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex == 2) // Check if it's the second level
             {
+            PlayerScore1 = 0; // Reset score when reaching 7 points
+            lifes = 3; // Reset lifes when reaching 7 points
             SceneManager.LoadScene("YouWin"); // Load the victory scene
             }
             else
             {
             PlayerScore1 = 0; // Reset score when reaching 7 points
+            lifes = 3; // Reset lifes when reaching 7 points
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load next level
             }
         }
@@ -97,6 +104,8 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        lifes = 3; // Reset lifes when game is over
+        PlayerScore1 = 0; // Reset score when game is over
         SceneManager.LoadScene("GameOver");
     }
 
