@@ -76,8 +76,15 @@ public class GameManager : MonoBehaviour
 
         if (PlayerScore1 >= 7)
         {
+            if (SceneManager.GetActiveScene().buildIndex == 2) // Check if it's the second level
+            {
+            SceneManager.LoadScene("YouWin"); // Load the victory scene
+            }
+            else
+            {
             PlayerScore1 = 0; // Reset score when reaching 7 points
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Load next level
+            }
         }
     }
 

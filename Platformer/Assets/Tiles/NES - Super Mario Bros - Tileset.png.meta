@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ac3fe87243367854c82951f41c2e38d6
+guid: fd52d4dcacc9d114fac94539ef5fdb3d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -667228130818228280
-    second: 10_basic_message_boxes_by_CharlesGabriel_0
+      213: -7683969000865734668
+    second: NES - Super Mario Bros - Tileset_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 10_basic_message_boxes_by_CharlesGabriel_0
+      name: NES - Super Mario Bros - Tileset_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 650
-        height: 1000
+        width: 680
+        height: 764
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8cf7e66dc878db6f0800000000000000
-      internalID: -667228130818228280
+      spriteID: 4ffd846b7ee0d5590800000000000000
+      internalID: -7683969000865734668
       vertices: []
       indices: 
       edges: []
@@ -130,8 +130,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      10_basic_message_boxes_by_CharlesGabriel_0: -667228130818228280
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

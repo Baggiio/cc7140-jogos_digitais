@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+
+public class Instructions : MonoBehaviour
 {
     public GUISkin layout;              // Fonte do placar
     // Start is called before the first frame update
@@ -22,12 +23,8 @@ public class MainMenu : MonoBehaviour
         GUI.skin = layout;
     }
 
-    public void PlayGame() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void Instructions() {
-        // Carrega a cena de instruções
-        SceneManager.LoadScene("Instructions");
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
